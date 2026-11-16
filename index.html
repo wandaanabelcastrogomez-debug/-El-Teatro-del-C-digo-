@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Teatro del Código · Aprende HTML y CSS jugando</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="marca">
+    <div class="logo">🎭</div>
+    <div>
+      <h1>El Teatro del Código</h1>
+      <p>Aprende HTML y CSS montando una obra</p>
+    </div>
+  </div>
+
+  <nav class="progreso" id="progreso" aria-label="Niveles"></nav>
+
+  <div class="cabecera-acciones">
+    <button class="btn-icono" id="btnChuleta" title="Chuleta de HTML y CSS">📖</button>
+    <button class="btn-icono" id="btnAyuda" title="Cómo se juega">?</button>
+  </div>
+</header>
+
+<main class="tablero">
+
+  <!-- ============ COLUMNA 1: MISIÓN ============ -->
+  <section class="panel mision">
+    <p class="etiqueta" id="nivelNum">Nivel 1 de 13</p>
+    <h2 id="misionTitulo">Tu primera etiqueta</h2>
+    <p class="concepto" id="misionConcepto">HTML · Etiquetas</p>
+    <p class="mision-texto" id="misionTexto"></p>
+
+    <div class="modelo-caja" id="modeloCaja" hidden>
+      <span class="modelo-titulo">Modelo · debe verse así</span>
+      <div class="modelo-escena" id="modeloEscena"></div>
+    </div>
+
+    <div class="objetivo-caja">
+      <div class="objetivo-titulo">
+        <span>Objetivos</span>
+        <strong id="contadorObj">0 / 0</strong>
+      </div>
+      <ul class="lista-objetivos" id="listaObjetivos"></ul>
+    </div>
+
+    <div class="pistas-caja">
+      <div class="pistas-cab">
+        <span>💡 Pistas</span>
+        <span class="pistas-usadas" id="pistasUsadas">0 / 3</span>
+      </div>
+      <div id="pistasLista" class="pistas-lista"></div>
+      <button class="btn btn-pista" id="btnPista">Dame una pista</button>
+      <button class="btn btn-solucion" id="btnSolucion">🧪 Ver la solución</button>
+    </div>
+  </section>
+
+  <!-- ============ COLUMNA 2: ESCENA ============ -->
+  <section class="panel escena-panel">
+    <div class="escena-cab">
+      <span class="escena-titulo">🎬 La escena</span>
+      <div class="escena-acciones">
+        <button class="btn btn-mini" id="btnVerCodigo" hidden>Ver HTML</button>
+        <button class="btn btn-mini" id="btnComprobar">✓ Comprobar</button>
+      </div>
+    </div>
+
+    <div class="cortina"></div>
+    <div class="escena-marco">
+      <div class="escena-visual" id="escenaVisual"></div>
+      <p class="escena-vacia" id="escenaVacia">Escribe tu código y aquí verás la página.</p>
+    </div>
+    <div class="suelo"></div>
+
+    <div class="codigo-escena" id="codigoEscena" hidden></div>
+
+    <p class="escena-nota" id="escenaNota"></p>
+  </section>
+
+  <!-- ============ COLUMNA 3: EDITOR ============ -->
+  <section class="panel editor-panel" id="editorPanel">
+    <div class="editor-cab">
+      <span class="punto rojo"></span><span class="punto amarillo"></span><span class="punto verde"></span>
+      <span class="archivo" id="archivoNombre">index.html</span>
+      <button class="btn btn-ejecutar" id="btnEjecutar">▶ Probar</button>
+    </div>
+
+    <div class="envoltorio" id="envoltorioArriba" hidden>.tarjeta {</div>
+
+    <div class="editor-caja">
+      <div class="gutter" id="gutter">1</div>
+      <textarea id="editor" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off"
+        aria-label="Editor de código"></textarea>
+    </div>
+
+    <div class="envoltorio envoltorio-abajo" id="envoltorioAbajo" hidden>}</div>
+
+    <div class="consola-cab">
+      <span>Avisos</span>
+      <span class="atajo" id="atajoTexto">se comprueba solo · Ctrl + Enter</span>
+    </div>
+    <div class="consola" id="consola" aria-live="polite">
+      <p class="consola-vacia">Aquí verás avisos y errores.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ MODAL ÉXITO ============ -->
+<div class="modal" id="modalExito" role="dialog" aria-modal="true" aria-labelledby="exitoTitulo">
+  <div class="modal-caja">
+    <div class="modal-confeti" id="confeti"></div>
+    <div class="estrellas" id="estrellasModal">⭐⭐⭐</div>
+    <h2 id="exitoTitulo">¡Nivel superado!</h2>
+    <p id="exitoTexto">¡La escena queda lista!</p>
+    <div class="exito-botones">
+      <button class="btn btn-secundario" id="btnRepetir">↺ Quedarme aquí</button>
+      <button class="btn btn-primario" id="btnSiguiente">Siguiente nivel →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL SOLUCIÓN ============ -->
+<div class="modal" id="modalSolucion" role="dialog" aria-modal="true" aria-labelledby="solTitulo">
+  <div class="modal-caja modal-ancha">
+    <button class="cerrar" id="btnCerrarSolucion" aria-label="Cerrar">✕</button>
+    <h2 id="solTitulo">La solución, explicada</h2>
+    <pre class="codigo-solucion" id="solucionCodigo"></pre>
+    <p class="solucion-nota" id="solucionNota"></p>
+    <div class="exito-botones">
+      <button class="btn btn-secundario" id="btnCopiarSolucion">📋 Copiar al editor</button>
+      <button class="btn btn-primario" id="btnCerrarSolucion2">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL CHULETA ============ -->
+<div class="modal" id="modalChuleta" role="dialog" aria-modal="true" aria-labelledby="chuletaTitulo">
+  <div class="modal-caja modal-ancha">
+    <button class="cerrar" id="btnCerrarChuleta" aria-label="Cerrar">✕</button>
+    <h2 id="chuletaTitulo">📖 Chuleta de la obra</h2>
+    <div id="chuletaContenido"></div>
+  </div>
+</div>
+
+<!-- ============ MODAL AYUDA ============ -->
+<div class="modal" id="modalAyuda" role="dialog" aria-modal="true" aria-labelledby="ayudaTitulo">
+  <div class="modal-caja modal-ancha">
+    <button class="cerrar" id="btnCerrarAyuda" aria-label="Cerrar">✕</button>
+    <h2 id="ayudaTitulo">Cómo se juega</h2>
+    <p class="ayuda-intro">
+      Eres el <strong>equipo técnico del teatro</strong>. En cada nivel escribes código de verdad y lo ves
+      al instante en la escena. No hay que pulsar nada: la escena y los objetivos se comprueban solos
+      mientras escribes (o con <strong>✓ Comprobar</strong> si tienes prisa).
+    </p>
+
+    <h3>Los tres capítulos</h3>
+    <ul class="ayuda-lista">
+      <li><strong>🎬 El escenario (HTML):</strong> escribes etiquetas: títulos, párrafos, listas, imágenes y enlaces.</li>
+      <li><strong>💡 Los focos (CSS · selectores):</strong> escribes un selector y se encienden exactamente los elementos marcados con 🎯.</li>
+      <li><strong>👗 El vestuario (CSS · propiedades):</strong> escribes declaraciones <code>propiedad: valor;</code> para que la caja se vea como el modelo.</li>
+    </ul>
+
+    <h3>Trucos</h3>
+    <ul class="ayuda-lista">
+      <li><code>Ctrl + Enter</code> comprueba al momento.</li>
+      <li>El botón <strong>📖</strong> abre la chuleta con lo que necesitas en cada capítulo.</li>
+      <li>Si algo no cambia, mira los <strong>avisos</strong> bajo el editor: te dicen qué falta o qué está mal escrito.</li>
+      <li>3 pistas por nivel y una solución explicada. Sin pistas ganas ⭐⭐⭐.</li>
+    </ul>
+
+    <p class="ayuda-nota">💾 Tu código y tu progreso se guardan en este navegador.</p>
+    <button class="btn btn-primario" id="btnCerrarAyuda2">¡Entendido!</button>
+  </div>
+</div>
+
+<script src="juego.js"></script>
+</body>
+</html>
